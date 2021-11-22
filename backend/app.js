@@ -8,6 +8,8 @@ const expressValidator = require("express-validator");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const booksRouter = require("./route/book.route");
+const categoryRouter = require("./route/category.route");
+
 require("dotenv").config();
 
 //create express app
@@ -42,9 +44,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //parse request data content type application/json
 app.use(bodyParser.json());
 
-
-//define book router
+//define Route
 app.use("/book", booksRouter)
+app.use("/category", categoryRouter)
 
 app.listen(port, () => {
   console.log(`Your book store is running at http://localhost:${port}`);

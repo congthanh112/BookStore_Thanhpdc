@@ -1,6 +1,4 @@
 const BookModel = require('../model/book.model')
-const { uuid } = require('uuidv4');
-const { response } = require('express');
 
 exports.getAllBook = (req, res, next) => {
     BookModel.getAllBook((err, books) => {
@@ -19,7 +17,7 @@ exports.getBookById = (req, res, next) => {
 exports.createBook = (req, res, next) => {
     const bookReqData = new BookModel(req.body);
 
-    if (req.body.contrustor === object && Object.keys(req.body).length === 0) {
+    if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
         res.send(400).send({ success: false, message: 'Please fill all field' })
     } else {
         BookModel.createNewBook(bookReqData, (err, book) => {
@@ -31,8 +29,7 @@ exports.createBook = (req, res, next) => {
 
 exports.updateBook = (req, res, next) => {
     const bookReqData = new BookModel(req.body);
-
-    if (req.body.contrustor === object && Object.keys(req.body).length === 0) {
+    if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
         res.send(400).send({ success: false, message: 'Please fill all field' })
     } else {
         BookModel.updateBook(req.params.id, bookReqData, (err, book) => {
@@ -43,7 +40,10 @@ exports.updateBook = (req, res, next) => {
 };
 
 exports.deleteBook = (req, res, next) => {
-
+    BookModel.deleteBook(req.params.id, (err, book) => {
+        if (err) res.send(err);
+        res.json({ success: true, message: 'Delete book successfully' })
+    })
 };
 
 exports.findBookByName = (req, res, next) => {
