@@ -1,18 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Layout from '../view/layout/Layout'
+import CategoryBar from '../view/core/categoryBar/CategoryBar';
+import Home from '../view/home/Home';
 import Profile from '../view/profile/Profile';
 
-const Router = () => {
+
+const Routes = () => {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route path="/" exact component={Layout}/>
-                <Route path="/profile" exact component={Layout}/>
-               
-            </Switch>
-        </BrowserRouter>
+        <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/book" component={CategoryBar} />
+
+        </Switch>
     )
 }
 
-export default Router;
+export default Routes;

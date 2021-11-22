@@ -9,6 +9,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const booksRouter = require("./route/book.route");
 const categoryRouter = require("./route/category.route");
+const subCategoryRouter = require("./route/subCategory.route");
 
 require("dotenv").config();
 
@@ -47,6 +48,7 @@ app.use(bodyParser.json());
 //define Route
 app.use("/book", booksRouter)
 app.use("/category", categoryRouter)
+app.use("/sub-category", subCategoryRouter)
 
 app.listen(port, () => {
   console.log(`Your book store is running at http://localhost:${port}`);

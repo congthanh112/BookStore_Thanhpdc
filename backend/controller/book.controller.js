@@ -1,20 +1,20 @@
 const BookModel = require('../model/book.model')
 
-exports.getAllBook = (req, res, next) => {
+exports.getAllBook = (req, res) => {
     BookModel.getAllBook((err, books) => {
         if (err) res.send(err);
         res.send(books);
     })
 };
 
-exports.getBookById = (req, res, next) => {
+exports.getBookById = (req, res) => {
     BookModel.getBookById(req.params.id, (err, book) => {
         if (err) res.send(err);
         res.send(book);
     })
 };
 
-exports.createBook = (req, res, next) => {
+exports.createBook = (req, res) => {
     const bookReqData = new BookModel(req.body);
 
     if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
@@ -27,7 +27,7 @@ exports.createBook = (req, res, next) => {
     }
 };
 
-exports.updateBook = (req, res, next) => {
+exports.updateBook = (req, res) => {
     const bookReqData = new BookModel(req.body);
     if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
         res.send(400).send({ success: false, message: 'Please fill all field' })
@@ -39,7 +39,7 @@ exports.updateBook = (req, res, next) => {
     }
 };
 
-exports.deleteBook = (req, res, next) => {
+exports.deleteBook = (req, res) => {
     BookModel.deleteBook(req.params.id, (err, book) => {
         if (err) res.send(err);
         res.json({ success: true, message: 'Delete book successfully' })

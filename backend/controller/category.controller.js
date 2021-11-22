@@ -1,13 +1,13 @@
 const CategoryModel = require('../model/category.model')
 
-exports.getAllCategory = (req, res, next) => {
+exports.getAllCategory = (req, res) => {
     CategoryModel.getAllCategory((err, categories) => {
         if (err) res.send(err);
         res.send(categories);
     })
 };
 
-exports.createCategory = (req, res, next) => {
+exports.createCategory = (req, res) => {
     const categoryReqData = new CategoryModel(req.body);
 
     if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
@@ -20,7 +20,7 @@ exports.createCategory = (req, res, next) => {
     }
 };
 
-exports.updateCategory = (req, res, next) => {
+exports.updateCategory = (req, res) => {
     const categoryReqData = new CategoryModel(req.body);
     if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
         res.send(400).send({ success: false, message: 'Please fill all field' })
@@ -32,7 +32,7 @@ exports.updateCategory = (req, res, next) => {
     }
 };
 
-exports.deleteCategory = (req, res, next) => {
+exports.deleteCategory = (req, res) => {
     CategoryModel.deleteCategory(req.params.id, (err, category) => {
         if (err) res.send(err);
         res.json({ success: true, message: 'Delete Category successfully' })
