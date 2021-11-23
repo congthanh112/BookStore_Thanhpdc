@@ -1,6 +1,7 @@
 const BookModel = require('../model/book.model')
 
 exports.getAllBook = (req, res) => {
+    console.log(new Date())
     BookModel.getAllBook((err, books) => {
         if (err) res.send(err);
         res.status(200).send(books);
@@ -18,7 +19,7 @@ exports.createBook = (req, res) => {
     const bookReqData = new BookModel(req.body);
 
     if (req.body.contrustor === Object && Object.keys(req.body).length === 0) {
-        res.send(400).send({ success: false, message: 'Please fill all field' })
+        res.status(400).send({ success: false, message: 'Please fill all field' })
     } else {
         BookModel.createNewBook(bookReqData, (err, book) => {
             if (err) res.send(err);

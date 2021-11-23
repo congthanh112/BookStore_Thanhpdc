@@ -9,11 +9,6 @@ const Category = function (category) {
     this.updated_at = category.updated_at;
 }
 
-const getCurrent = () => {
-    const a = new Date();
-    return (a.getFullYear() + '-' + (a.getMonth() + 1) + '-' + a.getDate() + ' ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds())
-}
-
 Category.getAllCategory = (result) => {
     dbConn.query('SELECT * FROM category', (err, res) => {
         if (err) {
@@ -26,7 +21,7 @@ Category.getAllCategory = (result) => {
 
 Category.createNewCategory = (categoryReqData, result) => {
     dbConn.query('INSERT INTO category(id, name, create_at, updated_at) VALUES (?,?,?,?)',
-        [uuidv4(), categoryReqData.name, getCurrent(), null], (err, res) => {
+        [uuidv4(), categoryReqData.name, new Date(), null], (err, res) => {
             if (err) {
                 console.log('Error while inserting data');
                 result(null, err);
@@ -38,7 +33,7 @@ Category.createNewCategory = (categoryReqData, result) => {
 }
 
 Category.updateCategory = (id, categoryReqData, result) => {
-    dbConn.query('UPDATE category SET name=?, updated_at=? WHERE id=?', [categoryReqData.name, getCurrent(), id], (err, res) => {
+    dbConn.query('UPDATE category SET name=?, updated_at=? WHERE id=?', [categoryReqData.name, new Date(), id], (err, res) => {
         if (err) {
             console.log('Error while updating data');
             result(null, err);

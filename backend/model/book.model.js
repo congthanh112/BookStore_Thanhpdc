@@ -14,11 +14,6 @@ const Book = function (book) {
     this.updated_at = book.updated_at;
 }
 
-const getCurrent = () => {
-    const a = new Date();
-    return (a.getFullYear() + '-' + (a.getMonth() + 1) + '-' + a.getDate() + ' ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds())
-}
-
 Book.getAllBook = (result) => {
     dbConn.query('SELECT * FROM book', (err, res) => {
         if (err) {
@@ -43,7 +38,7 @@ Book.getBookById = (id, result) => {
 
 Book.createNewBook = (bookReqData, result) => {
     dbConn.query('INSERT INTO book(id, name, author, category, sub_category, quantity, price, create_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)',
-        [uuidv4(), bookReqData.name, bookReqData.author, bookReqData.category, bookReqData.sub_category, bookReqData.quantity, bookReqData.price, getCurrent(), null],
+        [uuidv4(), bookReqData.name, bookReqData.author, bookReqData.category, bookReqData.sub_category, bookReqData.quantity, bookReqData.price, new Date(), null],
         (err, res) => {
             if (err) {
                 console.log('Error while inserting data');
@@ -57,7 +52,7 @@ Book.createNewBook = (bookReqData, result) => {
 
 Book.updateBook = (id, bookReqData, result) => {
     dbConn.query('UPDATE book SET name=?, author=?, category=?, sub_category=?, quantity=?, price=?, updated_at=? WHERE id=?',
-        [bookReqData.name, bookReqData.author, bookReqData.category, bookReqData.sub_category, bookReqData.quantity, bookReqData.price, getCurrent(), id],
+        [bookReqData.name, bookReqData.author, bookReqData.category, bookReqData.sub_category, bookReqData.quantity, bookReqData.price, new Date(), id],
         (err, res) => {
             if (err) {
                 console.log('Error while updating data');

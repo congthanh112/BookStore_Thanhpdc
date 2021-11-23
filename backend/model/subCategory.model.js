@@ -10,11 +10,6 @@ const SubCategory = function (subCategory) {
     this.updated_at = subCategory.updated_at;
 }
 
-const getCurrent = () => {
-    const a = new Date();
-    return (a.getFullYear() + '-' + (a.getMonth() + 1) + '-' + a.getDate() + ' ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds())
-}
-
 SubCategory.getAllSubCategory = (result) => {
     dbConn.query('SELECT * FROM sub_category', (err, res) => {
         if (err) {
@@ -39,7 +34,7 @@ SubCategory.getByCategoryId = (id, result) => {
 
 SubCategory.createNewSubCategory = (subCateReqData, result) => {
     dbConn.query('INSERT INTO sub_category(id, name, category_id create_at, updated_at) VALUES (?,?,?,?,?)',
-        [uuidv4(), subCateReqData.name, subCateReqData.categoryId, getCurrent(), null], (err, res) => {
+        [uuidv4(), subCateReqData.name, subCateReqData.categoryId, new Date(), null], (err, res) => {
             if (err) {
                 console.log('Error while inserting data');
                 result(null, err);
@@ -51,7 +46,7 @@ SubCategory.createNewSubCategory = (subCateReqData, result) => {
 }
 
 SubCategory.updateCategory = (id, subCateReqData, result) => {
-    dbConn.query('UPDATE sub_category SET name=?, category_id, updated_at=? WHERE id=?', [subCateReqData.name, subCateReqData.categoryId, getCurrent(), id], (err, res) => {
+    dbConn.query('UPDATE sub_category SET name=?, category_id, updated_at=? WHERE id=?', [subCateReqData.name, subCateReqData.categoryId, new Date(), id], (err, res) => {
         if (err) {
             console.log('Error while updating data');
             result(null, err);
