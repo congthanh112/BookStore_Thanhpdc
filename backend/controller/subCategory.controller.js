@@ -3,7 +3,14 @@ const SubCategoryModel = require('../model/subCategory.model')
 exports.getAllSubCategory = (req, res) => {
     SubCategoryModel.getAllSubCategory((err, subCategory) => {
         if (err) res.send(err);
-        res.send(subCategory);
+        res.status(200).send(subCategory);
+    })
+};
+
+exports.getByCategory = (req, res) => {
+    SubCategoryModel.getByCategoryId(req.params.id, (err, subCategory) => {
+        if (err) res.send(err);
+        res.status(200).send(subCategory);
     })
 };
 
@@ -15,7 +22,7 @@ exports.createSubCategory = (req, res) => {
     } else {
         SubCategoryModel.createNewSubCategory(subCateReqData, (err, subCate) => {
             if (err) res.send(err);
-            res.json({ status: true, message: 'SubCategory created successfully', data: subCate })
+            res.status(201).json({ status: true, message: 'SubCategory created successfully', data: subCate })
         })
     }
 };
@@ -27,7 +34,7 @@ exports.updateSubCategory = (req, res) => {
     } else {
         SubCategoryModel.updateSubCategory(req.params.id, subCateReqData, (err, subCate) => {
             if (err) res.send(err);
-            res.json({ status: true, message: 'SubCategory updated successfully', data: subCate })
+            res.status(200).json({ status: true, message: 'SubCategory updated successfully', data: subCate })
         })
     }
 };
@@ -35,7 +42,7 @@ exports.updateSubCategory = (req, res) => {
 exports.deleteSubCategory = (req, res) => {
     SubCategoryModel.deleteCategory(req.params.id, (err, subCate) => {
         if (err) res.send(err);
-        res.json({ success: true, message: 'Delete SubCategory successfully' })
+        res.status(200).json({ success: true, message: 'Delete SubCategory successfully' })
     })
 };
 

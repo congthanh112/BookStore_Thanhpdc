@@ -19,6 +19,18 @@ SubCategory.getAllSubCategory = (result) => {
     dbConn.query('SELECT * FROM sub_category', (err, res) => {
         if (err) {
             console.log('Error while fetching data', err);
+            result(null, err);
+        } else {
+            result(null, res)
+        }
+    })
+}
+
+SubCategory.getByCategoryId = (id, result) => {
+    dbConn.query('SELECT * FROM sub_category WHERE category_id=?', [id], (err, res) => {
+        if (err) {
+            console.log('Error while fetching data', err);
+            result(null, err);
         } else {
             result(null, res)
         }

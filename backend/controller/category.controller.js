@@ -3,7 +3,7 @@ const CategoryModel = require('../model/category.model')
 exports.getAllCategory = (req, res) => {
     CategoryModel.getAllCategory((err, categories) => {
         if (err) res.send(err);
-        res.send(categories);
+        res.status(200).send(categories);
     })
 };
 
@@ -15,7 +15,7 @@ exports.createCategory = (req, res) => {
     } else {
         CategoryModel.createNewCategory(categoryReqData, (err, category) => {
             if (err) res.send(err);
-            res.json({ status: true, message: 'Category created successfully', data: category })
+            res.status(201).json({ status: true, message: 'Category created successfully', data: category })
         })
     }
 };
@@ -27,7 +27,7 @@ exports.updateCategory = (req, res) => {
     } else {
         CategoryModel.updateCategory(req.params.id, categoryReqData, (err, category) => {
             if (err) res.send(err);
-            res.json({ status: true, message: 'Category updated successfully', data: category })
+            res.status(200).json({ status: true, message: 'Category updated successfully', data: category })
         })
     }
 };
@@ -35,7 +35,7 @@ exports.updateCategory = (req, res) => {
 exports.deleteCategory = (req, res) => {
     CategoryModel.deleteCategory(req.params.id, (err, category) => {
         if (err) res.send(err);
-        res.json({ success: true, message: 'Delete Category successfully' })
+        res.status(200).json({ success: true, message: 'Delete Category successfully' })
     })
 };
 

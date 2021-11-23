@@ -16,13 +16,14 @@ const Book = function (book) {
 
 const getCurrent = () => {
     const a = new Date();
-     return (a.getFullYear() + '-' + (a.getMonth() + 1) + '-' + a.getDate() + ' ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds())
+    return (a.getFullYear() + '-' + (a.getMonth() + 1) + '-' + a.getDate() + ' ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds())
 }
 
 Book.getAllBook = (result) => {
     dbConn.query('SELECT * FROM book', (err, res) => {
         if (err) {
             console.log('Error while fetching data', err);
+            result(null, err);
         } else {
             result(null, res)
         }
@@ -41,17 +42,17 @@ Book.getBookById = (id, result) => {
 }
 
 Book.createNewBook = (bookReqData, result) => {
-    dbConn.query('INSERT INTO book(id, name, author, category, sub_category, quantity, price, create_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)', 
-    [uuidv4(), bookReqData.name, bookReqData.author, bookReqData.category, bookReqData.sub_category, bookReqData.quantity, bookReqData.price, getCurrent(), null],
-     (err, res) => {
-        if (err) {
-            console.log('Error while inserting data');
-            result(null, err);
-        } else {
-            console.log('Insert book successfully');
-            result(null, res)
-        }
-    })
+    dbConn.query('INSERT INTO book(id, name, author, category, sub_category, quantity, price, create_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?)',
+        [uuidv4(), bookReqData.name, bookReqData.author, bookReqData.category, bookReqData.sub_category, bookReqData.quantity, bookReqData.price, getCurrent(), null],
+        (err, res) => {
+            if (err) {
+                console.log('Error while inserting data');
+                result(null, err);
+            } else {
+                console.log('Insert book successfully');
+                result(null, res)
+            }
+        })
 }
 
 Book.updateBook = (id, bookReqData, result) => {
@@ -76,6 +77,17 @@ Book.deleteBook = (id, result) => {
         } else {
             console.log('Delete book successfully');
             result(null, res)
+        }
+    })
+}
+
+Book.findBookByName = (search, result) => {
+    dbConn.query(`SELECT * FROM book WHERE name LIKE '%${search}%'`, (err, res) => {
+        if (err) {
+            console.log('Error while fetching data', err);
+            result(null, err);
+        } else {
+            result(null, res);
         }
     })
 }

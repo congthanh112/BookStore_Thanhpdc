@@ -46,9 +46,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //define Route
-app.use("/book", booksRouter)
-app.use("/category", categoryRouter)
-app.use("/sub-category", subCategoryRouter)
+app.use("/api/book", booksRouter)
+app.use("/api/category", categoryRouter)
+app.use("/api/sub-category", subCategoryRouter)
 
 app.listen(port, () => {
   console.log(`Your book store is running at http://localhost:${port}`);

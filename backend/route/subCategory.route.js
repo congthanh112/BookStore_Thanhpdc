@@ -5,6 +5,8 @@ const subCategoryController = require('../controller/subCategory.controller')
 
 router.get('/', subCategoryController.getAllSubCategory)
 
+router.get('/:id', subCategoryController.getByCategory)
+
 router.post("/", subCategoryController.createSubCategory)
 
 router.put("/:id", subCategoryController.updateSubCategory)
