@@ -1,7 +1,6 @@
-const BookModel = require('../model/book.model')
+const BookModel = require('../model/bookModel')
 
 exports.getAllBook = (req, res) => {
-    console.log(new Date())
     BookModel.getAllBook((err, books) => {
         if (err) res.send(err);
         res.status(200).send(books);

@@ -7,9 +7,9 @@ const cors = require("cors");
 const expressValidator = require("express-validator");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const booksRouter = require("./route/book.route");
-const categoryRouter = require("./route/category.route");
-const subCategoryRouter = require("./route/subCategory.route");
+const booksRouter = require("./route/user.bookRoute");
+const categoryRouter = require("./route/user.categoryRoute");
+const subCategoryRouter = require("./route/user.subCategoryRoute");
 
 require("dotenv").config();
 
@@ -47,9 +47,9 @@ app.use(bodyParser.json());
 
 //define Route
 const api_prefix = process.env.API_PREFIX
-app.use(`${api_prefix}/book`, booksRouter)
-app.use(`${api_prefix}/category`, categoryRouter)
-app.use(`${api_prefix}/sub-category`, subCategoryRouter)
+app.use(`${api_prefix}/user/books`, booksRouter)
+app.use(`${api_prefix}/user/categories`, categoryRouter)
+app.use(`${api_prefix}/user/sub-categories`, subCategoryRouter)
 
 app.listen(port, () => {
   console.log(`Your book store is running at http://localhost:${port}`);
