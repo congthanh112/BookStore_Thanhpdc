@@ -7,7 +7,7 @@ import Profile from '../view/profile/Profile';
 
 const Routes = () => {
     return (
-        <Switch>
+        <Switch>        
             <Route path="/" exact component={Home} />
             <Route path="/profile" component={Profile} />
             <Route path="/book" component={CategoryBar} />

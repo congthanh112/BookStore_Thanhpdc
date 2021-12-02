@@ -8,19 +8,19 @@ const Navbar = () => {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <Link className="nav-link " to="/">Home</Link>
+            <Link className="nav-link custom" to="/">Home</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">Dashboard</Link>
+            <Link className="nav-link custom" to="/">Dashboard</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/cart">Cart</Link>
+            <Link className="nav-link custom" to="/cart">Cart</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link " to="/profile">Profile</Link>
+            <Link className="nav-link custom" to="/profile">Profile</Link>
           </li>
           <li className="nav-item" style={{ marginLeft: 40, textDecoration: 'underline' }}>
-            <Link className="nav-link " href="#">Login</Link>
+            <Link className="nav-link custom" href="#">Login</Link>
           </li>
           <button
             type="button"

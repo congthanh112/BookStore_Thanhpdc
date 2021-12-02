@@ -7,9 +7,12 @@ const cors = require("cors");
 const expressValidator = require("express-validator");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const booksRouter = require("./route/user.bookRoute");
-const categoryRouter = require("./route/user.categoryRoute");
-const subCategoryRouter = require("./route/user.subCategoryRoute");
+const booksRouterAdmin = require("./route/admin.bookRoute");
+const categoryRouterAdmin = require("./route/admin.categoryRoute");
+const subCategoryRouterAdmin = require("./route/admin.subCategoryRoute");
+const booksRouterUser = require("./route/user.bookRoute");
+const categoryRouterUser = require("./route/user.categoryRoute");
+const subCategoryRouterUser = require("./route/user.subCategoryRoute");
 
 require("dotenv").config();
 
@@ -47,9 +50,13 @@ app.use(bodyParser.json());
 
 //define Route
 const api_prefix = process.env.API_PREFIX
-app.use(`${api_prefix}/user/books`, booksRouter)
-app.use(`${api_prefix}/user/categories`, categoryRouter)
-app.use(`${api_prefix}/user/sub-categories`, subCategoryRouter)
+app.use(`${api_prefix}/user/books`, booksRouterUser)
+app.use(`${api_prefix}/user/categories`, categoryRouterUser)
+app.use(`${api_prefix}/user/sub-categories`, subCategoryRouterUser)
+
+app.use(`${api_prefix}/admin/books`, booksRouterAdmin)
+app.use(`${api_prefix}/admin/categories`, categoryRouterAdmin)
+app.use(`${api_prefix}/admin/sub-categories`, subCategoryRouterAdmin)
 
 app.listen(port, () => {
   console.log(`Your book store is running at http://localhost:${port}`);

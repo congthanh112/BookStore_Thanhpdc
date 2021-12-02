@@ -14,8 +14,19 @@ const Book = function (book) {
     this.updated_at = book.updated_at;
 }
 
+Book.getAllActiveBook = (result) => {
+    dbConn.query("SELECT * FROM book WHERE status = 'Active' ", (err, res) => {
+        if (err) {
+            console.log('Error while fetching data', err);
+            result(null, err);
+        } else {
+            result(null, res)
+        }
+    })
+}
+
 Book.getAllBook = (result) => {
-    dbConn.query('SELECT * FROM book', (err, res) => {
+    dbConn.query("SELECT * FROM book", (err, res) => {
         if (err) {
             console.log('Error while fetching data', err);
             result(null, err);
@@ -26,7 +37,7 @@ Book.getAllBook = (result) => {
 }
 
 Book.getBookById = (id, result) => {
-    dbConn.query('SELECT * FROM book WHERE id = ?', id, (err, res) => {
+    dbConn.query("SELECT * FROM book WHERE id = ? AND status = 'Active' ", id, (err, res) => {
         if (err) {
             console.log('Error while fetching data', err);
             result(null, err);
